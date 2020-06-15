@@ -3,16 +3,24 @@ import Header from "../header";
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 import RandomPlanet from "../random-planet";
+import ErrorIndicator from "../error-indicator";
 
 export default class App extends Component {
   state = {
     selectedPerson: 5,
+    hasError: false,
   };
+  componentDidCatch() {
+    this.setState({ hasError: true });
+  }
 
   onItemSelected = (id) => {
     this.setState({ selectedPerson: id });
   };
   render() {
+    if (this.state.hasError) {
+      return <ErrorIndicator />;
+    }
     return (
       <div>
         <Header />
