@@ -1,33 +1,39 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Header from "../header";
 import PeoplePage from "../people-page";
 import RandomPlanet from "../random-planet";
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails, {Record} from "../item-details";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
+import ErrorBoundry from "../error-boundry";
+import Row from "../row/index";
 
 export default class App extends Component {
-  swapiService = new SwapiService();
+    swapiService = new SwapiService();
 
-  state = {
-    hasError: false,
-  };
-  componentDidCatch() {
-    this.setState({ hasError: true });
-  }
+    render() {
+        const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
+        const personDetails = <ItemDetails itemId={11}
+                                           getData={getPerson}
+                                           getImageUrl={getPersonImage}>
+            <Record field="gender" label="Gender"/>
+            <Record field="eyeColor" label="Eye Color"/>
+        </ItemDetails>;
+        const starshipDetails = <ItemDetails itemId={5}
+                                             getData={getStarship}
+                                             getImageUrl={getStarshipImage}>
+            <Record field="gender" label="Gender"/>
+            <Record field="eyeColor" label="Eye Color"/>
+        </ItemDetails>;
 
-  render() {
-    if (this.state.hasError) {
-      return <ErrorIndicator />;
-    }
-
-    return (
-      <div>
-        <Header />
-        <RandomPlanet />
-        <PeoplePage />
-        {/*<div className="row mb2">
+        return (
+            <ErrorBoundry>
+                <Header/>
+                <Row left={personDetails} right={starshipDetails}/>
+                {/*<RandomPlanet />*/}
+                {/*<PeoplePage />*/}
+                {/*<div className="row mb2">
           <div className="col-md-6">
             <ItemList
               onItemSelected={this.onPersonSelected}
@@ -43,7 +49,7 @@ export default class App extends Component {
             <PersonDetails personId={this.state.selectedPerson} />
           </div>
         </div>*/}
-        {/*<div className="row mb2">
+                {/*<div className="row mb2">
           <div className="col-md-6">
             <ItemList
               onItemSelected={this.onPersonSelected}
@@ -55,7 +61,7 @@ export default class App extends Component {
             <PersonDetails personId={this.state.selectedPerson} />
           </div>
         </div>*/}
-      </div>
-    );
-  }
+            </ErrorBoundry>
+        );
+    }
 }
