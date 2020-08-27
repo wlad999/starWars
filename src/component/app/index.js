@@ -8,6 +8,8 @@ import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import Row from "../row/index";
+import {PersonList, PlanetList, StarshipList} from "../sw-component";
+import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-component"
 
 export default class App extends Component {
     swapiService = new SwapiService();
@@ -32,6 +34,9 @@ export default class App extends Component {
             <ErrorBoundry>
                 <Header/>
                 <Row left={personDetails} right={starshipDetails}/>
+                <PersonDetails itemId={11}/>
+                <StarshipDetails itemId={5}/>
+                <PlanetDetails itemId={5}/>
                 {/*<RandomPlanet />*/}
                 {/*<PeoplePage />*/}
                 {/*<div className="row mb2">
@@ -52,15 +57,16 @@ export default class App extends Component {
         </div>*/}
                 <div className="row mb2">
                     <div className="col-md-6">
-                        <ItemList
-                            onItemSelected={this.onPersonSelected}
-                            getData={this.swapiService.getAllStarships}
-                            // renderItem={(item) => item.name}
-                        >{({name}) => <span>{name}</span> }</ItemList>
+                        <PersonList>
+                            {({name}) => <span>{name}</span>}
+                        </PersonList>
+                        <StarshipList>
+                            {({name}) => <span>{name}</span>}
+                        </StarshipList>
+                        <PlanetList>
+                            {({name}) => <span>{name}</span>}
+                        </PlanetList>
                     </div>
-                    {/*<div className="col-md-6">*/}
-                    {/*    <PersonDetails personId={this.state.selectedPerson}/>*/}
-                    {/*</div>*/}
                 </div>
             </ErrorBoundry>
         );
