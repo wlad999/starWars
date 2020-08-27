@@ -9,10 +9,13 @@ import SwapiService from "../../services/swapi-service";
 import ErrorBoundry from "../error-boundry";
 import Row from "../row/index";
 import {PersonList, PlanetList, StarshipList} from "../sw-component";
-import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-component"
+import {PersonDetails, PlanetDetails, StarshipDetails} from "../sw-component";
+import {SwapiSeviceProvider} from "../swapi-service-context"
+import DummySwapiService from "../../services/dummy-swapi-service";
 
 export default class App extends Component {
     swapiService = new SwapiService();
+    // swapiService = new DummySwapiService();
 
     render() {
         const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
@@ -32,14 +35,15 @@ export default class App extends Component {
 
         return (
             <ErrorBoundry>
-                <Header/>
-                <Row left={personDetails} right={starshipDetails}/>
-                <PersonDetails itemId={11}/>
-                <StarshipDetails itemId={5}/>
-                <PlanetDetails itemId={5}/>
-                {/*<RandomPlanet />*/}
-                {/*<PeoplePage />*/}
-                {/*<div className="row mb2">
+                <SwapiSeviceProvider value={this.swapiService}>
+                    <Header/>
+                    <Row left={personDetails} right={starshipDetails}/>
+                    <PersonDetails itemId={11}/>
+                    <StarshipDetails itemId={5}/>
+                    <PlanetDetails itemId={5}/>
+                    {/*<RandomPlanet />*/}
+                    {/*<PeoplePage />*/}
+                    {/*<div className="row mb2">
           <div className="col-md-6">
             <ItemList
               onItemSelected={this.onPersonSelected}
@@ -55,13 +59,14 @@ export default class App extends Component {
             <PersonDetails personId={this.state.selectedPerson} />
           </div>
         </div>*/}
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <PersonList/>
-                        <StarshipList/>
-                        <PlanetList/>
+                    <div className="row mb2">
+                        <div className="col-md-6">
+                            <PersonList/>
+                            <StarshipList/>
+                            <PlanetList/>
+                        </div>
                     </div>
-                </div>
+                </SwapiSeviceProvider>
             </ErrorBoundry>
         );
     }
