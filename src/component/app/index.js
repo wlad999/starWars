@@ -14,11 +14,22 @@ import {SwapiSeviceProvider} from "../swapi-service-context"
 import DummySwapiService from "../../services/dummy-swapi-service";
 
 export default class App extends Component {
-    swapiService = new SwapiService();
+    state = {
+        showRandomPlanet: true,
+        swapiService: new SwapiService()
+    }
     // swapiService = new DummySwapiService();
+    onServiceChange = () => {
+        console.log("CHANGE")
+        this.setState(({swapiService}) => {
+            const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService
+            return {swapiService: new Service()}
+
+        })
+    }
 
     render() {
-        const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
+        const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.state.swapiService;
         const personDetails = <ItemDetails itemId={11}
                                            getData={getPerson}
                                            getImageUrl={getPersonImage}>
@@ -35,8 +46,8 @@ export default class App extends Component {
 
         return (
             <ErrorBoundry>
-                <SwapiSeviceProvider value={this.swapiService}>
-                    <Header/>
+                <SwapiSeviceProvider value={this.state.swapiService}>
+                    <Header onServiceChange={this.onServiceChange}/>
                     <Row left={personDetails} right={starshipDetails}/>
                     <PersonDetails itemId={11}/>
                     <StarshipDetails itemId={5}/>

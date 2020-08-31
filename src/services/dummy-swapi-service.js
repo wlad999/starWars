@@ -55,7 +55,19 @@ export default class DummySwapiService {
     getAllPlanets = async () => {
         return this._planets
     };
-    getAllStarship = async () => {
+    getAllStarships = async () => {
         return this._starships
+    };
+    getStarship = async () => {
+        return this._starships[0]
+    };
+    getPersonImage = () => {
+        return "https://picsum.photos/200/300"
+    }
+    getStarshipImage = () => {
+        return "https://picsum.photos/200/300"
+    }
+    getPlanetImage = () => {
+        return "https://picsum.photos/200/300"
     }
 }
