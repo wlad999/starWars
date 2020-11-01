@@ -18,3 +18,9 @@
   .person-details .list-group-item .term{
     margin-right: .5rem;
   }
+
+  .person-details .list-group-item .resident{
+    font-size: 12px;
+    margin: 0;
+    margin-left: 15px;
+  }
