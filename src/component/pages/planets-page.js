@@ -6,7 +6,7 @@ import Paginations from "../pagination";
 export default class PlanetsPage extends Component {
   state = {
     selectedItem: null,
-    page: 2,
+    page: 1,
     count: 1,
   };
   onItemSelected = (selectedItem) => {

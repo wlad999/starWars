@@ -7,7 +7,7 @@ import Row from "../row";
 export default class StarshipsPage extends Component {
   state = {
     selectedItem: null,
-    page: 2,
+    page: 1,
     count: 1,
   };
   onItemSelected = (selectedItem) => {
