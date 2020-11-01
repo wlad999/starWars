@@ -1,0 +1,11 @@
+.tumb {
+	cursor: pointer;
+	background-color: #303030;
+	border: 1px solid #444;
+}
+.tumb:hover {
+	background-color: #444;
+}
+.curentPage {
+	background: #222
+}

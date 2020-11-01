@@ -11,7 +11,10 @@ const withData = (View) => {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-      if (this.props.getData !== prevProps.getData) {
+      if (
+        this.props.getData !== prevProps.getData ||
+        this.props.page !== prevProps.page
+      ) {
         this.update();
       }
     }
@@ -29,9 +32,10 @@ const withData = (View) => {
         .getData(this.props.page)
         .then((data) => {
           this.setState({
-            data,
+            data: data.items,
             loading: false,
           });
+          this.props.onTotalItemsSet(data.count / 10);
         })
         .catch(() => {
           this.setState({
