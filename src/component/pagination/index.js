@@ -26,17 +26,15 @@ const Paginations = ({ count, onPageSet, page }) => {
     let styleActivPage = el === page ? { background: " #222" } : null;
 
     return (
-      <>
-        <li className="page-item" key={el} onClick={() => onPageSet(el)}>
-          <div
-            className="page-link tumb"
-            aria-label="Previous"
-            style={styleActivPage}
-          >
-            <span aria-hidden="true">{el}</span>
-          </div>
-        </li>
-      </>
+      <li className="page-item" key={el} onClick={() => onPageSet(el)}>
+        <div
+          className="page-link tumb"
+          aria-label="Previous"
+          style={styleActivPage}
+        >
+          <span aria-hidden="true">{el}</span>
+        </div>
+      </li>
     );
   });
   return (
@@ -48,7 +46,7 @@ const Paginations = ({ count, onPageSet, page }) => {
           </div>
         </li>
         {pages}
-        <li className="page-item" onClick={nextPage}>
+        <li className="page-item" onClick={nextPage} key={count + 1}>
           <div className="page-link tumb" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </div>

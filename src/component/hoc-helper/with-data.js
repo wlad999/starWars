@@ -35,7 +35,7 @@ const withData = (View) => {
             data: data.items,
             loading: false,
           });
-          this.props.onTotalItemsSet(data.count / 10);
+          this.props.onTotalItemsSet(Math.ceil(data.count / 10));
         })
         .catch(() => {
           this.setState({

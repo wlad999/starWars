@@ -26,7 +26,6 @@ export default class PlanetsPage extends Component {
   };
 
   render() {
-    console.log("this.state", this.state);
     const { selectedItem, page, count } = this.state;
     return (
       <>
